@@ -1,8 +1,10 @@
 package pl.pio.supplymanager;
 
+import javafx.scene.control.Button;
+
 public class CompleteProductRecord implements Comparable<CompleteProductRecord>{
     private String code;
-    private String description;
+    private DescriptionButton descriptionButton;
     private String category;
     private String production;
     private String name;
@@ -11,7 +13,7 @@ public class CompleteProductRecord implements Comparable<CompleteProductRecord>{
 
     public CompleteProductRecord(String code, String description, String category, String production, String name, int quantity, double price) {
         this.code = code;
-        this.description = description;
+        this.descriptionButton = new DescriptionButton("Pokaż opis", description);
         this.category = category;
         this.production = production;
         this.name = name;
@@ -23,8 +25,8 @@ public class CompleteProductRecord implements Comparable<CompleteProductRecord>{
         return code;
     }
 
-    public String getDescription() {
-        return description;
+    public Button getDescriptionButton() {
+        return descriptionButton;
     }
 
     public String getCategory() {

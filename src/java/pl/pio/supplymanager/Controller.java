@@ -20,7 +20,7 @@ public class Controller implements Initializable {
     @FXML private TableColumn<CompleteProductRecord, String> colCategory;
     @FXML private TableColumn<CompleteProductRecord, String> colProducer;
     @FXML private TableColumn<CompleteProductRecord, Double> colPrice;
-    @FXML private TableColumn<CompleteProductRecord, String> colDescription;
+    @FXML private TableColumn<CompleteProductRecord, Button> colDescription;
 
 
     @Override
@@ -31,7 +31,10 @@ public class Controller implements Initializable {
         colCategory.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord,String>("category"));
         colProducer.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord,String>("production"));
         colPrice.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord,Double>("price"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord,String>("description"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord, Button>("descriptionButton"));
+        colDescription.setStyle("-fx-alignment: CENTER;");
+
+
 
         AppDB appDB = new AppDB();
         try {
@@ -43,6 +46,7 @@ public class Controller implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         productsTable.setItems(appDB.getCompleteProductRecordDB());
     }
 }
