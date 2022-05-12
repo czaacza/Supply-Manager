@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+    @FXML private AnchorPane mainPane;
     @FXML private TableView<CompleteProductRecord> productsTable;
     @FXML private TableColumn<CompleteProductRecord, String> colName;
     @FXML private TableColumn<CompleteProductRecord, Integer> colQuantity;
@@ -36,6 +38,7 @@ public class Controller implements Initializable {
 
 
 
+
         AppDB appDB = new AppDB();
         try {
             appDB.readProductsFromFile();
@@ -48,5 +51,9 @@ public class Controller implements Initializable {
         }
 
         productsTable.setItems(appDB.getCompleteProductRecordDB());
+    }
+
+    public AnchorPane getMainPane() {
+        return mainPane;
     }
 }
