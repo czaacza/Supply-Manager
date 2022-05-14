@@ -15,13 +15,13 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class AppDB {
-    ObservableList<CompleteProductRecord> completeProductRecordDB = FXCollections.observableArrayList();
-    ObservableList<Product> productsDB = FXCollections.observableArrayList();
-    ObservableList<Production> productionDB = FXCollections.observableArrayList();
-    ObservableList<Category> categoriesDB = FXCollections.observableArrayList();
-    ObservableList<Description> descriptionsDB = FXCollections.observableArrayList();
+    private ObservableList<CompleteProductRecord> completeProductRecordDB = FXCollections.observableArrayList();
+    private ObservableList<Product> productsDB = FXCollections.observableArrayList();
+    private ObservableList<Production> productionDB = FXCollections.observableArrayList();
+    private ObservableList<Category> categoriesDB = FXCollections.observableArrayList();
+    private ObservableList<Description> descriptionsDB = FXCollections.observableArrayList();
 
-    public void readProductsFromFile(String pathToFile, ObservableList<Product> productsDB) throws FileNotFoundException {
+    public void readProductsFromFile(String pathToFile) throws FileNotFoundException {
         int code;
         int descriptionID;
         int categoryID;
@@ -55,7 +55,7 @@ public class AppDB {
             }
         }
     }
-    public void readProductionsFromFile(String pathToFile, ObservableList<Production> productionDB) throws FileNotFoundException, ParseException {
+    public void readProductionsFromFile(String pathToFile) throws FileNotFoundException, ParseException {
         int productionID;
         String manufacturer;
         String country;
@@ -85,7 +85,7 @@ public class AppDB {
             }
         }
     }
-    public void readCategoriesFromFile(String pathToFile, ObservableList<Category> categoriesDB) throws FileNotFoundException {
+    public void readCategoriesFromFile(String pathToFile) throws FileNotFoundException {
         int categoryID;
         String category;
 
@@ -109,7 +109,7 @@ public class AppDB {
             }
         }
     }
-    public void readDescriptionsFromFile(String pathToFile, ObservableList<Description> descriptionsDB) throws FileNotFoundException {
+    public void readDescriptionsFromFile(String pathToFile) throws FileNotFoundException {
         int descID;
         String desc;
 
@@ -120,9 +120,11 @@ public class AppDB {
 
         while (input.hasNextLine()) {
             String line = input.nextLine();
+            System.out.println("line: " + line);
             if (line.trim().isEmpty()) continue;
 
             String[] parts = line.split("\\t");
+            System.out.println(parts[0]);
 
             if (parts.length == 2) {
                 descID = parseInt(parts[0]);
@@ -136,11 +138,12 @@ public class AppDB {
 
     private String getCategoryAsID(int ID){
         Category cat = categoriesDB.get(ID-1);
-        return cat.category;
+        return cat.getCategory();
     }
+
     private String getDiscriptionAsID(int ID){
         Description des = descriptionsDB.get(ID-1);
-        return des.desc;
+        return des.getDesc();
 
     }
     private String getProductionAsID(int ID){
@@ -174,19 +177,19 @@ public class AppDB {
         }
     }
 
-    private ObservableList<Product> getProductsDB() {
+    public ObservableList<Product> getProductsDB() {
         return productsDB;
     }
 
-    private ObservableList<Production> getProductionDB() {
+    public ObservableList<Production> getProductionDB() {
         return productionDB;
     }
 
-    private ObservableList<Category> getCategoriesDB() {
+    public ObservableList<Category> getCategoriesDB() {
         return categoriesDB;
     }
 
-    private ObservableList<Description> getDescriptionsDB() {
+    public ObservableList<Description> getDescriptionsDB() {
         return descriptionsDB;
     }
     public ObservableList<CompleteProductRecord> getCompleteProductRecordDB() {

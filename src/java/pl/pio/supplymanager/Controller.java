@@ -36,11 +36,11 @@ public class Controller implements Initializable {
 
         AppDB appDB = new AppDB();
         try {
-            appDB.readProductsFromFile("products.txt",appDB.productsDB);
-            appDB.readProductionsFromFile("productions.txt", appDB.productionDB);
-            appDB.readCategoriesFromFile("categories.txt", appDB.categoriesDB);
-            appDB.readDescriptionsFromFile("descriptions.txt", appDB.descriptionsDB);
-            appDB.createCompleteProductDB(appDB.completeProductRecordDB, appDB.productsDB);
+            appDB.readProductsFromFile("products.txt");
+            appDB.readProductionsFromFile("productions.txt");
+            appDB.readCategoriesFromFile("categories.txt");
+            appDB.readDescriptionsFromFile("descriptions.txt");
+            appDB.createCompleteProductDB(appDB.getCompleteProductRecordDB(), appDB.getProductsDB());
         } catch (Exception e) {
             e.printStackTrace();
         }

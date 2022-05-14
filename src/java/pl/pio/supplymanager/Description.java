@@ -1,8 +1,8 @@
 package pl.pio.supplymanager;
 
 public class Description {
-    int descID;
-    String desc;
+    private int descID;
+    private String desc;
 
     public Description(int descID, String desc) {
         this.desc = desc;
@@ -26,7 +26,7 @@ public class Description {
     public boolean equals( Object o ) {
         if( o instanceof Description ) {
             Description desc = (Description)o;
-            return desc.descID == this.descID;
+            return (desc.descID == this.descID) && (desc.desc.equals(this.desc));
         } else {
             return false;
         }

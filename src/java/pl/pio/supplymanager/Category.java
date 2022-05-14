@@ -1,8 +1,8 @@
 package pl.pio.supplymanager;
 
 public class Category implements Comparable<Category>{
-    int categoryID;
-    String category;
+    private int categoryID;
+    private String category;
 
     public Category(int categoryID, String category) {
         this.categoryID = categoryID;
@@ -33,7 +33,7 @@ public class Category implements Comparable<Category>{
     public boolean equals( Object o ) {
         if( o instanceof Category ) {
             Category cat = (Category)o;
-            return cat.categoryID == this.categoryID;
+            return (cat.categoryID == this.categoryID) && (cat.category.equals(this.category));
         } else {
             return false;
         }

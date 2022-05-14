@@ -6,5 +6,6 @@ public class TestMain {
         appDBTest.readProductsFromFile_Test();
         appDBTest.readProductionsFromFile_Test();
         appDBTest.readCategoriesFromFile_Test();
+        appDBTest.readDescriptionsFromFile_Test();
     }
 }
