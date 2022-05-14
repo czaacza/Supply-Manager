@@ -50,11 +50,12 @@ public class AppDB {
                 quantity = parseInt(parts[5]);
                 price = parseDouble(parts[6]);
 
-                productsDB.add(new Product(code, descriptionID, categoryID, productionID,name,quantity,price));
+                productsDB.add(new Product(code, descriptionID, categoryID, productionID, name, quantity, price));
                 //System.out.printf("Dodano produkt poprawnie (" + name + ")\n");
             }
         }
     }
+
     public void readProductionsFromFile(String pathToFile) throws FileNotFoundException, ParseException {
         int productionID;
         String manufacturer;
@@ -85,6 +86,7 @@ public class AppDB {
             }
         }
     }
+
     public void readCategoriesFromFile(String pathToFile) throws FileNotFoundException {
         int categoryID;
         String category;
@@ -109,6 +111,7 @@ public class AppDB {
             }
         }
     }
+
     public void readDescriptionsFromFile(String pathToFile) throws FileNotFoundException {
         int descID;
         String desc;
@@ -120,11 +123,9 @@ public class AppDB {
 
         while (input.hasNextLine()) {
             String line = input.nextLine();
-            System.out.println("line: " + line);
             if (line.trim().isEmpty()) continue;
 
             String[] parts = line.split("\\t");
-            System.out.println(parts[0]);
 
             if (parts.length == 2) {
                 descID = parseInt(parts[0]);
@@ -136,23 +137,25 @@ public class AppDB {
         }
     }
 
-    private String getCategoryAsID(int ID){
-        Category cat = categoriesDB.get(ID-1);
+    private String getCategoryAsID(int ID) {
+        Category cat = categoriesDB.get(ID - 1);
         return cat.getCategory();
     }
 
-    private String getDiscriptionAsID(int ID){
-        Description des = descriptionsDB.get(ID-1);
+    private String getDiscriptionAsID(int ID) {
+        Description des = descriptionsDB.get(ID - 1);
         return des.getDesc();
 
     }
-    private String getProductionAsID(int ID){
-        Production pro = productionDB.get(ID-1);
+
+    private String getProductionAsID(int ID) {
+        Production pro = productionDB.get(ID - 1);
         return pro.getManufacturer();
     }
-    public void createCompleteProductDB(ObservableList<CompleteProductRecord> completeProductRecordDB, ObservableList<Product> productsDB){
+
+    public void createCompleteProductDB(ObservableList<CompleteProductRecord> completeProductRecordDB, ObservableList<Product> productsDB) {
         int size = productsDB.size();
-        for(int currentIndex = 0; currentIndex < size; currentIndex++){
+        for (int currentIndex = 0; currentIndex < size; currentIndex++) {
             String code;
             String description;
             String category;
@@ -173,7 +176,7 @@ public class AppDB {
             description = getDiscriptionAsID(currentProduct.getDescriptionID());
 
 
-            completeProductRecordDB.add(new CompleteProductRecord(code,description,category,production,name,quantity,price));
+            completeProductRecordDB.add(new CompleteProductRecord(code, description, category, production, name, quantity, price));
         }
     }
 
@@ -192,6 +195,7 @@ public class AppDB {
     public ObservableList<Description> getDescriptionsDB() {
         return descriptionsDB;
     }
+
     public ObservableList<CompleteProductRecord> getCompleteProductRecordDB() {
         return completeProductRecordDB;
     }
