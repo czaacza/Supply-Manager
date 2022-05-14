@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +13,6 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    @FXML private AnchorPane mainPane;
     @FXML private TableView<CompleteProductRecord> productsTable;
     @FXML private TableColumn<CompleteProductRecord, String> colName;
     @FXML private TableColumn<CompleteProductRecord, Integer> colQuantity;
@@ -36,24 +34,16 @@ public class Controller implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord, Button>("descriptionButton"));
         colDescription.setStyle("-fx-alignment: CENTER;");
 
-
-
-
         AppDB appDB = new AppDB();
         try {
-            appDB.readProductsFromFile();
-            appDB.readProductionsFromFile();
-            appDB.readCategoriesFromFile();
-            appDB.readDescriptionsFromFile();
-            appDB.createCompleteProductDB();
+            appDB.readProductsFromFile("products.txt",appDB.productsDB);
+            appDB.readProductionsFromFile("productions.txt", appDB.productionDB);
+            appDB.readCategoriesFromFile("categories.txt", appDB.categoriesDB);
+            appDB.readDescriptionsFromFile("descriptions.txt", appDB.descriptionsDB);
+            appDB.createCompleteProductDB(appDB.completeProductRecordDB, appDB.productsDB);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         productsTable.setItems(appDB.getCompleteProductRecordDB());
-    }
-
-    public AnchorPane getMainPane() {
-        return mainPane;
     }
 }

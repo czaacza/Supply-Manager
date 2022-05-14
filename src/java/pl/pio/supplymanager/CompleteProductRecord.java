@@ -2,7 +2,7 @@ package pl.pio.supplymanager;
 
 import javafx.scene.control.Button;
 
-public class CompleteProductRecord implements Comparable<CompleteProductRecord>{
+public class CompleteProductRecord implements Comparable<pl.pio.supplymanager.CompleteProductRecord>{
     private String code;
     private DescriptionButton descriptionButton;
     private String category;
@@ -51,22 +51,22 @@ public class CompleteProductRecord implements Comparable<CompleteProductRecord>{
 
     @Override
     public boolean equals( Object o ) {
-        if( o instanceof CompleteProductRecord ) {
-            CompleteProductRecord os = (CompleteProductRecord)o;
+        if( o instanceof pl.pio.supplymanager.CompleteProductRecord) {
+            pl.pio.supplymanager.CompleteProductRecord os = (pl.pio.supplymanager.CompleteProductRecord)o;
             return Integer.parseInt(os.code) == Integer.parseInt(this.code);
         } else {
             return false;
         }
     }
     @Override
-    public int compareTo(CompleteProductRecord cmp2){
+    public int compareTo(pl.pio.supplymanager.CompleteProductRecord cmp2){
         return this.quantity - cmp2.quantity;
     }
 
-    public int compareToQuantity(CompleteProductRecord cmp2){
+    public int compareToQuantity(pl.pio.supplymanager.CompleteProductRecord cmp2){
         return this.quantity - cmp2.quantity;
     }
-    public double compareToPrice(CompleteProductRecord cmp2){
+    public double compareToPrice(pl.pio.supplymanager.CompleteProductRecord cmp2){
         return this.price - cmp2.price;
     }
 

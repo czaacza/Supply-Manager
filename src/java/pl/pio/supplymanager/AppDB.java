@@ -21,7 +21,7 @@ public class AppDB {
     ObservableList<Category> categoriesDB = FXCollections.observableArrayList();
     ObservableList<Description> descriptionsDB = FXCollections.observableArrayList();
 
-    public void readProductsFromFile() throws FileNotFoundException {
+    public void readProductsFromFile(String pathToFile, ObservableList<Product> productsDB) throws FileNotFoundException {
         int code;
         int descriptionID;
         int categoryID;
@@ -30,7 +30,7 @@ public class AppDB {
         int quantity;
         double price;
 
-        URL url = getClass().getResource("products.txt");
+        URL url = getClass().getResource(pathToFile);
         assert url != null;
         File file = new File(url.getPath());
         Scanner input = new Scanner(file);
@@ -55,14 +55,14 @@ public class AppDB {
             }
         }
     }
-    public void readProductionsFromFile() throws FileNotFoundException, ParseException {
+    public void readProductionsFromFile(String pathToFile, ObservableList<Production> productionDB) throws FileNotFoundException, ParseException {
         int productionID;
         String manufacturer;
         String country;
         Date data;
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        URL url = getClass().getResource("productions.txt");
+        URL url = getClass().getResource(pathToFile);
         assert url != null;
         File file = new File(url.getPath());
         Scanner input = new Scanner(file);
@@ -85,11 +85,11 @@ public class AppDB {
             }
         }
     }
-    public void readCategoriesFromFile() throws FileNotFoundException {
+    public void readCategoriesFromFile(String pathToFile, ObservableList<Category> categoriesDB) throws FileNotFoundException {
         int categoryID;
         String category;
 
-        URL url = getClass().getResource("categories.txt");
+        URL url = getClass().getResource(pathToFile);
         assert url != null;
         File file = new File(url.getPath());
         Scanner input = new Scanner(file);
@@ -109,11 +109,11 @@ public class AppDB {
             }
         }
     }
-    public void readDescriptionsFromFile() throws FileNotFoundException {
+    public void readDescriptionsFromFile(String pathToFile, ObservableList<Description> descriptionsDB) throws FileNotFoundException {
         int descID;
         String desc;
 
-        URL url = getClass().getResource("descriptions.txt");
+        URL url = getClass().getResource(pathToFile);
         assert url != null;
         File file = new File(url.getPath());
         Scanner input = new Scanner(file);
@@ -147,7 +147,7 @@ public class AppDB {
         Production pro = productionDB.get(ID-1);
         return pro.getManufacturer();
     }
-    public void createCompleteProductDB(){
+    public void createCompleteProductDB(ObservableList<CompleteProductRecord> completeProductRecordDB, ObservableList<Product> productsDB){
         int size = productsDB.size();
         for(int currentIndex = 0; currentIndex < size; currentIndex++){
             String code;

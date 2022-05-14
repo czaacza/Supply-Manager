@@ -3,6 +3,10 @@ package pl.pio.supplymanager;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Paint;
 
 public class DescriptionButton extends Button {
 
@@ -38,9 +42,19 @@ public class DescriptionButton extends Button {
             }
         });
 
-        DescriptionDrawer descriptionDrawer = new DescriptionDrawer(this);
-        descriptionDrawer.drawDescription();
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println(getDescription());
+                AnchorPane descriptionPane = new AnchorPane();
+                descriptionPane.setLayoutX(500);
+                descriptionPane.setLayoutY(150);
+                descriptionPane.setPrefHeight(145);
+                descriptionPane.setPrefWidth(260);
+                descriptionPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("white"), null, null)));
 
+            }
+        });
     }
 
     public String getDescription() {
