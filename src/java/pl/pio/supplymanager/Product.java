@@ -18,6 +18,17 @@ public class Product implements Comparable<Product>{
         this.quantity = quantity;
         this.price = price;
     }
+
+    public Product() {
+        this.code = 0;
+        this.descriptionID = 0;
+        this.categoryID = 0;
+        this.productionID = 0;
+        this.name = null;
+        this.quantity = 0;
+        this.price = 0.0;
+    }
+
     public int getCode() {
         return code;
     }
@@ -54,6 +65,22 @@ public class Product implements Comparable<Product>{
         this.quantity = quantity;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setDescriptionID(int descriptionID) {
+        this.descriptionID = descriptionID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public void setProductionID(int productionID) {
+        this.productionID = productionID;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -80,5 +107,18 @@ public class Product implements Comparable<Product>{
     }
     public double compareToPrice(Product product2){
         return this.price - product2.price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "code=" + code +
+                ", descriptionID=" + descriptionID +
+                ", categoryID=" + categoryID +
+                ", productionID=" + productionID +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }

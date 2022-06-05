@@ -1,24 +1,33 @@
 package pl.pio.supplymanager;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 
 public class CompleteProductRecord implements Comparable<pl.pio.supplymanager.CompleteProductRecord>{
     private String code;
     private DescriptionButton descriptionButton;
+    private ChangeProductNameButton changeProductNameButton;
     private String category;
     private String production;
     private String name;
     private int quantity;
     private double price;
+    private CheckBox select;
 
-    public CompleteProductRecord(String code, String description, String category, String production, String name, int quantity, double price) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CompleteProductRecord(String code, String description, String category, String production, String name, int quantity, double price, AppDB appDb) {
         this.code = code;
         this.descriptionButton = new DescriptionButton("Pokaż opis", description);
+        this.changeProductNameButton = new ChangeProductNameButton(name, appDb);
         this.category = category;
         this.production = production;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.select = new CheckBox();
     }
 
     public String getCode() {
@@ -27,6 +36,9 @@ public class CompleteProductRecord implements Comparable<pl.pio.supplymanager.Co
 
     public Button getDescriptionButton() {
         return descriptionButton;
+    }
+    public Button getChangeProductNameButton() {
+        return changeProductNameButton;
     }
 
     public String getCategory() {
@@ -47,6 +59,13 @@ public class CompleteProductRecord implements Comparable<pl.pio.supplymanager.Co
 
     public double getPrice() {
         return price;
+    }
+    public CheckBox getSelect(){
+        return select;
+    }
+
+    public void setSelect(CheckBox select){
+        this.select = select;
     }
 
     @Override

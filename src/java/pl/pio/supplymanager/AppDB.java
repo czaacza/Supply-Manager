@@ -137,18 +137,18 @@ public class AppDB {
         }
     }
 
-    private String getCategoryAsID(int ID) {
+    public String getCategoryAsID(int ID) {
         Category cat = categoriesDB.get(ID - 1);
         return cat.getCategory();
     }
 
-    private String getDiscriptionAsID(int ID) {
+    public String getDiscriptionAsID(int ID) {
         Description des = descriptionsDB.get(ID - 1);
         return des.getDesc();
 
     }
 
-    private String getProductionAsID(int ID) {
+    public String getProductionAsID(int ID) {
         Production pro = productionDB.get(ID - 1);
         return pro.getManufacturer();
     }
@@ -176,7 +176,7 @@ public class AppDB {
             description = getDiscriptionAsID(currentProduct.getDescriptionID());
 
 
-            completeProductRecordDB.add(new CompleteProductRecord(code, description, category, production, name, quantity, price));
+            completeProductRecordDB.add(new CompleteProductRecord(code, description, category, production, name, quantity, price, this));
         }
     }
 
@@ -198,6 +198,44 @@ public class AppDB {
 
     public ObservableList<CompleteProductRecord> getCompleteProductRecordDB() {
         return completeProductRecordDB;
+    }
+    public void searchAndSetNameProduct(String name, String newName){
+        for (Product p:productsDB) {
+            if(p.getName().equals(name))
+            {
+                p.setName(newName);
+            }
+        }
+    }
+    public boolean searchNameProduct(String name){
+        for (Product p:productsDB) {
+            if(p.getName().equals(name))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void searchAndSetNameCompleteProductRecord(String name, String newName){
+        for (CompleteProductRecord p:completeProductRecordDB) {
+            if(p.getName().equals(name))
+            {
+                p.setName(newName);
+            }
+        }
+    }
+    public boolean searchNameCompleteProductRecord(String name){
+        for (CompleteProductRecord p:completeProductRecordDB) {
+            if(p.getName().equals(name))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteProductsFromDB(Product product){
+        productsDB.remove(product);
     }
 
 }
