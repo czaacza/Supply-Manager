@@ -1,15 +1,9 @@
 package pl.pio.supplymanager;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.input.InputMethodRequests;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Paint;
 
 public class ChangeProductNameButton extends Button {
 
@@ -49,8 +43,10 @@ public class ChangeProductNameButton extends Button {
                 td.setHeaderText("Podaj nową nazwę produktu");
                 td.showAndWait();
                 String newName = td.getEditor().getText();
-                setText(newName);
-                setNewNameValueInStorage(text,newName,appDb);
+                if(!newName.isEmpty()){
+                    setText(newName);
+                    setNewNameValueInStorage(text,newName,appDb);
+                }
             }
         });
     }

@@ -1,13 +1,17 @@
 package pl.pio.supplymanager;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,7 +45,7 @@ public class Controller implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord, Button>("descriptionButton"));
         colDescription.setStyle("-fx-alignment: CENTER;");
         colSelect.setCellValueFactory(new PropertyValueFactory<CompleteProductRecord, CheckBox>("select"));
-        colName.setStyle("-fx-alignment: CENTER;");
+        colSelect.setStyle("-fx-alignment: CENTER;");
 
         appDB = new AppDB();
         try {
@@ -54,9 +58,18 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
         productsTable.setItems(appDB.getCompleteProductRecordDB());
-        
+        preventColumnReordering(productsTable);
+
         saveButton.setOnAction(this::onSaveButtonClick);
         addNewItem.setOnAction(this::onAddNewItemButtonClick);
+    }
+
+    public static <T> void preventColumnReordering(TableView<T> tableView) {
+        Platform.runLater(() -> {
+            for (Node header : tableView.lookupAll(".column-header")) {
+                header.addEventFilter(MouseEvent.MOUSE_DRAGGED, Event::consume);
+            }
+        });
     }
 
     @FXML

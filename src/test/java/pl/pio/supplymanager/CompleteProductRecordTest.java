@@ -1,11 +1,8 @@
 package pl.pio.supplymanager;
 
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CompleteProductRecordTest {
 

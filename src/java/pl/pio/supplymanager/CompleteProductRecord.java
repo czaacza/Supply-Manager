@@ -20,7 +20,7 @@ public class CompleteProductRecord implements Comparable<pl.pio.supplymanager.Co
 
     public CompleteProductRecord(String code, String description, String category, String production, String name, int quantity, double price, AppDB appDb) {
         this.code = code;
-        this.descriptionButton = new DescriptionButton("Pokaż opis", description);
+        this.descriptionButton = new DescriptionButton(name, description);
         this.changeProductNameButton = new ChangeProductNameButton(name, appDb);
         this.category = category;
         this.production = production;

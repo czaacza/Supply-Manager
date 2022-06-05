@@ -1,19 +1,18 @@
 package pl.pio.supplymanager;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Paint;
 
 public class DescriptionButton extends Button {
 
+    private final String productName;
     private final String description;
 
-    public DescriptionButton(String text, String description) {
-        super(text);
+    public DescriptionButton(String productName, String description) {
+        super("Pokaż");
+        this.productName = productName;
         this.description = description;
         setPrefWidth(200);
         setPrefHeight(200);
@@ -45,14 +44,11 @@ public class DescriptionButton extends Button {
         setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(getDescription());
-                AnchorPane descriptionPane = new AnchorPane();
-                descriptionPane.setLayoutX(500);
-                descriptionPane.setLayoutY(150);
-                descriptionPane.setPrefHeight(145);
-                descriptionPane.setPrefWidth(260);
-                descriptionPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("white"), null, null)));
-
+                Alert descriptionAlert = new Alert(Alert.AlertType.INFORMATION);
+                descriptionAlert.setTitle("Opis produktu");
+                descriptionAlert.setHeaderText(productName);
+                descriptionAlert.setContentText(getDescription());
+                descriptionAlert.showAndWait();
             }
         });
     }
