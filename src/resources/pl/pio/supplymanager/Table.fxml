@@ -69,7 +69,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="53.0" prefWidth="120.0" text="ARCHIWIZUJ DANE" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="archiveButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="53.0" prefWidth="120.0" text="ARCHIWIZUJ DANE" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>

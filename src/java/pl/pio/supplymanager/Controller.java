@@ -6,13 +6,11 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +28,7 @@ public class Controller implements Initializable {
     @FXML private TableColumn<CompleteProductRecord, CheckBox> colSelect;
 
     @FXML private Button saveButton;
+    @FXML private Button archiveButton;
     @FXML private Button addNewItem;
 
     private AppDB appDB;
@@ -61,6 +60,7 @@ public class Controller implements Initializable {
         preventColumnReordering(productsTable);
 
         saveButton.setOnAction(this::onSaveButtonClick);
+        archiveButton.setOnAction(this::onArchiveButtonClick);
         addNewItem.setOnAction(this::onAddNewItemButtonClick);
     }
 
@@ -75,11 +75,42 @@ public class Controller implements Initializable {
     @FXML
     public void onSaveButtonClick(ActionEvent e) {
         AppDBSaver appDBSaver = new AppDBSaver(appDB);
+        URL urlToProducts = getClass().getResource("products.txt");
+        URL urlToProductions = getClass().getResource("productions.txt");
+        URL urlToCategories = getClass().getResource("categories.txt");
+        URL urlToDescriptions = getClass().getResource("descriptions.txt");
         try {
-            appDBSaver.saveProductsToFile("products.txt");
-            appDBSaver.saveProductionsToFile("productions.txt");
-            appDBSaver.saveCategoriesToFile("categories.txt");
-            appDBSaver.saveDescriptionsToFile("descriptions.txt");
+            appDBSaver.saveProductsToFile(urlToProducts.getPath());
+            appDBSaver.saveProductionsToFile(urlToProductions.getPath());
+            appDBSaver.saveCategoriesToFile(urlToCategories.getPath());
+            appDBSaver.saveDescriptionsToFile(urlToDescriptions.getPath());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onArchiveButtonClick(ActionEvent e) {
+        AppDBSaver appDBSaver = new AppDBSaver(appDB);
+
+        TextInputDialog td = new TextInputDialog("");
+        td.setHeaderText("Podaj ścieżkę folderu do zapisania bazy danych");
+        td.showAndWait();
+        String folderPath = td.getEditor().getText().trim();
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Podano nieprawidłową ścieżkę!");
+            alert.setContentText("Nie można odnaleźć takiego folderu!");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            appDBSaver.saveProductsToFile(folderPath + "\\products.txt");
+            appDBSaver.saveProductionsToFile(folderPath + "\\productions.txt");
+            appDBSaver.saveCategoriesToFile(folderPath + "\\categories.txt");
+            appDBSaver.saveDescriptionsToFile(folderPath + "\\descriptions.txt");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

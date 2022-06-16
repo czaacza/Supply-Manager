@@ -17,8 +17,7 @@ public class AppDBSaver {
     }
 
     public void saveProductsToFile(String pathToFile) throws IOException {
-        URL url = getClass().getResource(pathToFile);
-        File file = new File(url.getPath());
+        File file = new File(pathToFile);
         FileWriter myWriter = new FileWriter(file.getPath());
 
         ObservableList<Product> list = appDB.getProductsDB();
@@ -32,8 +31,7 @@ public class AppDBSaver {
     }
 
     public void saveProductionsToFile(String pathToFile) throws IOException {
-        URL url = getClass().getResource(pathToFile);
-        File file = new File(url.getPath());
+        File file = new File(pathToFile);
         FileWriter myWriter = new FileWriter(file.getPath());
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -47,8 +45,7 @@ public class AppDBSaver {
     }
 
     public void saveCategoriesToFile(String pathToFile) throws IOException {
-        URL url = getClass().getResource(pathToFile);
-        File file = new File(url.getPath());
+        File file = new File(pathToFile);
         FileWriter myWriter = new FileWriter(file.getPath());
 
         ObservableList<Category> list = appDB.getCategoriesDB();
@@ -60,8 +57,7 @@ public class AppDBSaver {
     }
 
     public void saveDescriptionsToFile(String pathToFile) throws IOException {
-        URL url = getClass().getResource(pathToFile);
-        File file = new File(url.getPath());
+        File file = new File(pathToFile);
         FileWriter myWriter = new FileWriter(file.getPath());
 
         ObservableList<Description> list = appDB.getDescriptionsDB();
